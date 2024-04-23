@@ -139,7 +139,7 @@ def bike(id):
         result = mongo.db.bicicletas.update_one({'id': id}, {'$set': update_data})
         if result.matched_count == 0:
             return ({'mensagem': 'Nenhuma bike encontrado com este ID'}), 404
-        return ({'mensagem': 'bike atualizadacom sucesso'}), 200
+        return ({'mensagem': 'bike atualizada com sucesso'}), 200
 
     elif request.method == 'DELETE':
         result = mongo.db.bicicletas.delete_one({'id': id})
@@ -218,8 +218,8 @@ def emp_delete(id_emprestimo):
   if request.method == 'DELETE':
     emp = db_func.emp_find(id_emprestimo)
     if not isinstance(emp, str):
-        mongo.db.emprestimos.update_one({'id':id_emprestimo}, {'$set': {'status': 'inativo'}})
-        mongo.db.bicicletas.update_one({'id': emp['bicicleta_id']}, {'$set': {'status': 'disponivel'}})
+        mongo.db.bicicletas.delete_one({'id': id})
+        mongo.db.bicicletas.update_one({'id': emp['bicicleta_id']}, {'$set': {'status': 'Disponivel'}})
         mongo.db.usuarios.update_one({'id': emp['usuario_id']}, {'$pull': {'emprestimos': {'id': id_emprestimo}}})
         return f'Emprestimo <{id_emprestimo}> deletado com sucesso'
     return 'Erro: Emprestimo não encontdrado existe'
