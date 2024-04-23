@@ -82,6 +82,7 @@ def usuario(id):
 
     elif request.method == 'DELETE':
         result = mongo.db.usuarios.delete_one({'id': id})
+        mongo.db.emprestimos.delete_one({'usuario_id': id})
         if result.deleted_count == 0:
             return ({'message': 'Nenhum usuario encontrado com este ID'}), 404
         return ({'message': 'Usuario deletado com sucesso'}), 200
@@ -142,6 +143,7 @@ def bike(id):
 
     elif request.method == 'DELETE':
         result = mongo.db.bicicletas.delete_one({'id': id})
+        mongo.db.emprestimos.delete_one({'bicicleta_id': id})
         if result.deleted_count == 0:
             return ({'message': 'Nenhuma bike encontrado com este ID'}), 404
         return ({'message': 'bike deletada com sucesso'}), 200    
