@@ -1,0 +1,3 @@
+[submodule "enttrega/enttrega/exercicio_api_rest_mongo_streamlit"]
+	path = enttrega/enttrega/exercicio_api_rest_mongo_streamlit
+	url = https://github.com/Marcelo-vta/APS-5_prog-eficaz_back-end
